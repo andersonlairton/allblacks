@@ -32,3 +32,10 @@ services:
             - /sessions
             - ~/docker/phpmyadmin/config.user.inc.php:/etc/phpmyadmin/config.user.inc.php
             - /custom/phpmyadmin/theme/:/www/themes/theme/
+    dump:  
+        build: Dumper/  
+        volumes:  
+            - ./Dumper/:/var/lib/  
+        command: sh -c "sleep 20 && /usr/bin/mysql -h mysql -uroot -proot < /var/lib/dump.sql"  
+        depends_on:  
+            - bd 
